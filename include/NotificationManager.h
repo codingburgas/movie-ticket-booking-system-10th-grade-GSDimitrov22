@@ -1,8 +1,20 @@
-//
-// Created by ivans on 28/06/2025.
-//
+#pragma once
+#include <iostream>
+#include "Movie.h"
+#include "Booking.h"
+using namespace std;
 
-#ifndef NOTIFICATIONMANAGER_H
-#define NOTIFICATIONMANAGER_H
+class NotificationManager {
+public:
+    static void notifyNewMovie(const Movie& movie) {
+        cout << "\U0001F4E2 New Movie Released: " << movie.title << endl;
+    }
 
-#endif //NOTIFICATIONMANAGER_H
+    static void notifyBooking(const Booking& booking) {
+        cout << "\U0001F4E2 Booking Confirmed for: " << booking.user.name << endl;
+    }
+
+    static void notifyCancellation(const Booking& booking) {
+        cout << "\U0001F4E2 Booking Canceled for: " << booking.user.name << endl;
+    }
+};
