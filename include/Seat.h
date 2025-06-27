@@ -1,8 +1,23 @@
-//
-// Created by ivans on 28/06/2025.
-//
+#pragma once
+#include <string>
+using namespace std;
 
-#ifndef SEAT_H
-#define SEAT_H
+enum class SeatType { SILVER, GOLD, PLATINUM };
 
-#endif //SEAT_H
+class Seat {
+public:
+    string seatNumber;
+    SeatType type;
+    bool isBooked;
+
+    Seat(string sn, SeatType st) : seatNumber(sn), type(st), isBooked(false) {}
+
+    double getPrice() const {
+        switch (type) {
+        case SeatType::SILVER: return 100.0;
+        case SeatType::GOLD: return 150.0;
+        case SeatType::PLATINUM: return 200.0;
+        }
+        return 0.0;
+    }
+};
