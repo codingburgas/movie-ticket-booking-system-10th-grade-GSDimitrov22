@@ -13,7 +13,7 @@ public:
         movies.push_back(movie);
     }
 
-    vector<Movie> searchByTitle(const string& title) {
+    vector<Movie> searchByTitle(const string& title) const {
         vector<Movie> results;
         for (const auto& movie : movies) {
             if (movie.title == title) {
@@ -21,5 +21,9 @@ public:
             }
         }
         return results;
+    }
+
+    vector<Movie> getAllMovies() const {
+        return movies;
     }
 };
