@@ -1,0 +1,8 @@
+//
+// Created by ivans on 28/06/2025.
+//
+
+#ifndef NOTIFICATIONMANAGER_H
+#define NOTIFICATIONMANAGER_H
+
+#endif //NOTIFICATIONMANAGER_H
