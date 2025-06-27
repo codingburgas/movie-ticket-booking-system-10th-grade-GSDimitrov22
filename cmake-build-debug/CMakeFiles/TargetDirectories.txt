@@ -1,3 +1,3 @@
-C:/Users/ivans/OneDrive/Работен плот/New folder (2)/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/movie_ticket_booking_system_10th_grade_GSDimitrov22.dir
-C:/Users/ivans/OneDrive/Работен плот/New folder (2)/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/ivans/OneDrive/Работен плот/New folder (2)/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/ivans/OneDrive/Работен плот/MOVIE AND TICKET APP LAST VERSION/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/movie_ticket_booking_system_10th_grade_GSDimitrov22.dir
+C:/Users/ivans/OneDrive/Работен плот/MOVIE AND TICKET APP LAST VERSION/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ivans/OneDrive/Работен плот/MOVIE AND TICKET APP LAST VERSION/movie-ticket-booking-system-10th-grade-GSDimitrov22/cmake-build-debug/CMakeFiles/rebuild_cache.dir
