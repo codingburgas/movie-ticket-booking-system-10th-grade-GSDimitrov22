@@ -1,8 +1,11 @@
-//
-// Created by ivans on 28/06/2025.
-//
+#pragma once
+#include <string>
+using namespace std;
 
-#ifndef USER_H
-#define USER_H
+class User {
+public:
+    string name;
+    string role;
 
-#endif //USER_H
+    User(string n, string r) : name(n), role(r) {}
+};
