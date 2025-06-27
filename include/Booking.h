@@ -1,8 +1,18 @@
-//
-// Created by ivans on 28/06/2025.
-//
+#pragma once
+#include <vector>
+#include "User.h"
+#include "Show.h"
+#include "Seat.h"
+#include "Payment.h"
+using namespace std;
 
-#ifndef BOOKING_H
-#define BOOKING_H
+class Booking {
+public:
+    User user;
+    Show show;
+    vector<string> seatNumbers;
+    Payment payment;
 
-#endif //BOOKING_H
+    Booking(User u, Show s, vector<string> seats, Payment p)
+        : user(u), show(s), seatNumbers(seats), payment(p) {}
+};
