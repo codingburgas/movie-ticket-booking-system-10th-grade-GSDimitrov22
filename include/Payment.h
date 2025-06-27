@@ -1,8 +1,11 @@
-//
-// Created by ivans on 28/06/2025.
-//
+#pragma once
+#include <string>
+using namespace std;
 
-#ifndef PAYMENT_H
-#define PAYMENT_H
+class Payment {
+public:
+    string method;
+    double amount;
 
-#endif //PAYMENT_H
+    Payment(string m, double a) : method(m), amount(a) {}
+};
