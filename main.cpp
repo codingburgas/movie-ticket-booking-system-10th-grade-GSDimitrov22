@@ -71,7 +71,7 @@ int main() {
     int choice;
 
     do {
-        cout << "\n🎬 Movie Ticket Booking System 🎫\n";
+        cout << "\n Movie Ticket Booking System \n";
         cout << "1. Show All Movies\n";
         cout << "2. Add New Movie\n";
         cout << "3. Search Movie by Title\n";
