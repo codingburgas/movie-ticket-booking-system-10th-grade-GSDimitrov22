@@ -39,7 +39,7 @@ void addNewMovie(MovieManager& movieManager) {
     Movie newMovie(title, language, genre, releaseDate);
     movieManager.addMovie(newMovie);
     NotificationManager::notifyNewMovie(newMovie);
-    cout << "\u2705 Movie added successfully!\n";
+    cout << "Movie added successfully!\n";
 }
 
 void bookTicket(User& user, Show& show) {
@@ -140,10 +140,10 @@ int main() {
                 searchMovies(movieManager);
                 break;
             case 5:
-                cout << "\U0001F44B Exiting... Goodbye!\n";
+                cout << "Exiting... Goodbye!\n";
                 break;
             default:
-                cout << "\u26A0\uFE0F Invalid option. Try again.\n";
+                cout << "Invalid option. Try again.\n";
         }
     } while (choice != 5);
 
