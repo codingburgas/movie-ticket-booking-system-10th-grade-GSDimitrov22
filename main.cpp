@@ -1,8 +1,16 @@
-#include <iostream>
-#include <limits>
-#include "include/Movie.h"
-#include "include/MovieManager.h"
 
+#include <iostream>
+#include <sstream>
+#include <limits>
+#include "MovieManager.h"
+#include "NotificationManager.h"
+#include "Show.h"
+#include "User.h"
+#include "Booking.h"
+#include "include/Hall.h"
+#include "include/MovieManager.h"
+#include "include/Seat.h"
+#include "include/Show.h"
 using namespace std;
 
 void displayMovie(const Movie& movie) {
@@ -13,89 +21,129 @@ void displayMovie(const Movie& movie) {
     cout << "Release Date: " << movie.releaseDate << endl;
 }
 
-void showAllMovies(const MovieManager& movieManager) {
-    auto movies = movieManager.getAllMovies();
-    if (movies.empty()) {
-        cout << "No movies available.\n";
-    } else {
-        for (const auto& movie : movies) {
-            displayMovie(movie);
-        }
-    }
-}
-
 void addNewMovie(MovieManager& movieManager) {
     string title, language, genre, releaseDate;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Enter movie title: ";
     getline(cin, title);
-
     cout << "Enter language: ";
     getline(cin, language);
-
     cout << "Enter genre: ";
     getline(cin, genre);
-
     cout << "Enter release date (YYYY-MM-DD): ";
     getline(cin, releaseDate);
 
     Movie newMovie(title, language, genre, releaseDate);
     movieManager.addMovie(newMovie);
-    cout << "✅ Movie added successfully!\n";
+    NotificationManager::notifyNewMovie(newMovie);
+    cout << "\u2705 Movie added successfully!\n";
 }
 
-void searchMovieByTitle(const MovieManager& movieManager) {
-    string title;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Enter title to search: ";
-    getline(cin, title);
+void bookTicket(User& user, Show& show) {
+    vector<string> selectedSeats;
+    string seatInput;
+    double totalCost = 0.0;
 
-    auto results = movieManager.searchByTitle(title);
-    if (results.empty()) {
-        cout << "❌ No movies found with title: " << title << endl;
-    } else {
-        for (const auto& movie : results) {
-            displayMovie(movie);
+    cin.ignore();
+    cout << "Available seats:\n";
+    for (const auto& seat : show.hall->seats) {
+        if (!seat.isBooked)
+            cout << seat.seatNumber << " (" << (int)seat.type << ")\n";
+    }
+
+    cout << "Enter seat numbers to book (comma separated): ";
+    getline(cin, seatInput);
+
+    stringstream ss(seatInput);
+    string seatNumber;
+    while (getline(ss, seatNumber, ',')) {
+        Seat* seat = show.hall->getSeat(seatNumber);
+        if (seat && !seat->isBooked) {
+            seat->isBooked = true;
+            totalCost += seat->getPrice();
+            selectedSeats.push_back(seat->seatNumber);
         }
     }
+
+    string method = user.role == "Customer" ? "Credit Card" : "Cash";
+    Payment payment(method, totalCost);
+    Booking booking(user, show, selectedSeats, payment);
+    NotificationManager::notifyBooking(booking);
+    cout << "\nBooking completed. Total Cost: $" << totalCost << "\n";
+}
+
+void searchMovies(MovieManager& movieManager) {
+    string query;
+    cout << "Search by:\n1. Title\n2. Language\n3. Genre\n4. Release Date\nChoice: ";
+    int option;
+    cin >> option;
+    cin.ignore();
+    cout << "Enter your query: ";
+    getline(cin, query);
+
+    vector<Movie> results;
+    switch (option) {
+        case 1: results = movieManager.searchByTitle(query); break;
+        case 2: results = movieManager.searchByLanguage(query); break;
+        case 3: results = movieManager.searchByGenre(query); break;
+        case 4: results = movieManager.searchByReleaseDate(query); break;
+        default: cout << "Invalid option"; return;
+    }
+
+    for (const auto& movie : results)
+        displayMovie(movie);
+    if (results.empty())
+        cout << "No movies found.\n";
 }
 
 int main() {
     MovieManager movieManager;
-
-    // Sample data
     movieManager.addMovie(Movie("Avengers", "English", "Action", "2023-11-10"));
-    movieManager.addMovie(Movie("3 Idiots", "Hindi", "Comedy", "2009-12-25"));
+
+    Hall hall(1);
+    for (int i = 1; i <= 10; ++i)
+        hall.addSeat(Seat("S" + to_string(i), SeatType::SILVER));
+    for (int i = 11; i <= 15; ++i)
+        hall.addSeat(Seat("G" + to_string(i), SeatType::GOLD));
+    for (int i = 16; i <= 18; ++i)
+        hall.addSeat(Seat("P" + to_string(i), SeatType::PLATINUM));
+
+    Show show(movieManager.getAllMovies()[0], &hall, "18:00");
+    User user("Alice", "Customer");
 
     int choice;
-
     do {
         cout << "\n Movie Ticket Booking System \n";
         cout << "1. Show All Movies\n";
         cout << "2. Add New Movie\n";
-        cout << "3. Search Movie by Title\n";
-        cout << "4. Exit\n";
+        cout << "3. Book Ticket\n";
+        cout << "4. Search Movies\n";
+        cout << "5. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1:
-                showAllMovies(movieManager);
+                for (const auto& movie : movieManager.getAllMovies())
+                    displayMovie(movie);
                 break;
             case 2:
                 addNewMovie(movieManager);
                 break;
             case 3:
-                searchMovieByTitle(movieManager);
+                bookTicket(user, show);
                 break;
             case 4:
-                cout << "👋 Exiting... Goodbye!\n";
+                searchMovies(movieManager);
+                break;
+            case 5:
+                cout << "\U0001F44B Exiting... Goodbye!\n";
                 break;
             default:
-                cout << "⚠️ Invalid option. Try again.\n";
+                cout << "\u26A0\uFE0F Invalid option. Try again.\n";
         }
-    } while (choice != 4);
+    } while (choice != 5);
 
     return 0;
 }
