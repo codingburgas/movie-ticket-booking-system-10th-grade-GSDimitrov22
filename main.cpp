@@ -2,13 +2,15 @@
 #include <iostream>
 #include <sstream>
 #include <limits>
-#include "MovieManager.h"
-#include "NotificationManager.h"
-#include "Show.h"
+
+/*
 #include "User.h"
 #include "Booking.h"
+*/
+
 #include "include/Hall.h"
 #include "include/MovieManager.h"
+#include "include/NotificationManager.h"
 #include "include/Seat.h"
 #include "include/Show.h"
 using namespace std;
@@ -73,7 +75,7 @@ void bookTicket(User& user, Show& show) {
     cout << "\nBooking completed. Total Cost: $" << totalCost << "\n";
 }
 
-void searchMovies(MovieManager& movieManager) {
+void searchMovies(const MovieManager& movieManager) {
     string query;
     cout << "Search by:\n1. Title\n2. Language\n3. Genre\n4. Release Date\nChoice: ";
     int option;
