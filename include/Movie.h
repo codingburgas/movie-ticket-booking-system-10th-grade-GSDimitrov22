@@ -1,15 +1,13 @@
 #pragma once
 #include <string>
 
-using namespace std;
+struct Movie {
+    int id;
+    std::string title;
+    std::string language;
+    std::string genre;
+    std::string releaseDate;
 
-class Movie {
-public:
-    string title;
-    string language;
-    string genre;
-    string releaseDate;
-
-    Movie(string t, string l, string g, string r)
-        : title(t), language(l), genre(g), releaseDate(r) {}
+    Movie(int id, const std::string& t, const std::string& l, const std::string& g, const std::string& d)
+        : id(id), title(t), language(l), genre(g), releaseDate(d) {}
 };
