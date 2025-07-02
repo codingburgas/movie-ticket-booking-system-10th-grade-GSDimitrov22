@@ -4,7 +4,6 @@
 #include "User.h"
 #include "Show.h"
 #include "Payment.h"
-
 struct Booking {
     User user;
     Show show;
