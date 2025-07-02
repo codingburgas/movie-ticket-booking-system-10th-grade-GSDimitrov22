@@ -3,17 +3,14 @@
 #include <vector>
 #include "Hall.h"
 
-using namespace std;
+struct Cinema {
+    int id;
+    std::string name;
+    std::vector<Hall> halls;
 
-class Cinema {
-public:
-    string name;
-    string city;
-    vector<Hall> halls;
+    Cinema(int id, const std::string& name) : id(id), name(name) {}
 
-    Cinema(string n, string c) : name(n), city(c) {}
-
-    void addHall(Hall hall) {
+    void addHall(const Hall& hall) {
         halls.push_back(hall);
     }
 };
