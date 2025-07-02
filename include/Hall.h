@@ -1,23 +1,29 @@
 #pragma once
+#include <string>
 #include <vector>
 #include "Seat.h"
-using namespace std;
+#include "Show.h"
 
-class Hall {
-public:
-    int hallId;
-    vector<Seat> seats;
+struct Hall {
+    int id;
+    std::string name;
+    std::vector<Seat> seats;
+    std::vector<Show> shows;
 
-    Hall(int id) : hallId(id) {}
+    Hall(int id, const std::string& name) : id(id), name(name) {}
 
     void addSeat(const Seat& seat) {
         seats.push_back(seat);
     }
 
-    Seat* getSeat(const string& seatNumber) {
-        for (auto& seat : seats) {
-            if (seat.seatNumber == seatNumber) return &seat;
-        }
+    Seat* getSeat(const std::string& seatNumber) {
+        for (auto& seat : seats)
+            if (seat.seatNumber == seatNumber)
+                return &seat;
         return nullptr;
+    }
+
+    void addShow(const Show& show) {
+        shows.push_back(show);
     }
 };
