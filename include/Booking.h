@@ -1,21 +1,16 @@
 #pragma once
-#include <utility>
 #include <vector>
+#include <string>
 #include "User.h"
 #include "Show.h"
 #include "Payment.h"
-using namespace std;
 
-class Booking {
-public:
+struct Booking {
     User user;
     Show show;
-    vector<string> seatNumbers;
+    std::vector<std::string> seats;
     Payment payment;
-    vector<string> seats_;
 
-    Booking(User u, Show s, vector<string> seats, Payment p);
+    Booking(const User& u, const Show& s, const std::vector<std::string>& seats, const Payment& p)
+        : user(u), show(s), seats(seats), payment(p) {}
 };
-
-inline Booking::Booking(User u, Show s, vector<string> seats, Payment p): user(std::move(u)), show(s), seatNumbers(std::move(seats)), payment(p), seats_(std::move(seats))
-{}
