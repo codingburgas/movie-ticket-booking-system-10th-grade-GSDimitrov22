@@ -1,22 +1,21 @@
 #pragma once
 #include <string>
-using namespace std;
 
-enum class SeatType { SILVER, GOLD, PLATINUM };
+enum class SeatType { SILVER = 1, GOLD = 2, PLATINUM = 3 };
 
-class Seat {
-public:
-    string seatNumber;
+struct Seat {
+    std::string seatNumber;
     SeatType type;
     bool isBooked;
 
-    Seat(string sn, SeatType st) : seatNumber(sn), type(st), isBooked(false) {}
+    Seat(const std::string& number, SeatType type)
+        : seatNumber(number), type(type), isBooked(false) {}
 
     double getPrice() const {
         switch (type) {
-        case SeatType::SILVER: return 100.0;
-        case SeatType::GOLD: return 150.0;
-        case SeatType::PLATINUM: return 200.0;
+        case SeatType::SILVER: return 10.0;
+        case SeatType::GOLD: return 15.0;
+        case SeatType::PLATINUM: return 20.0;
         }
         return 0.0;
     }
