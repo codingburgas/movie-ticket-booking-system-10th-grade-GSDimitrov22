@@ -2,54 +2,58 @@
 #include <vector>
 #include <string>
 #include "Movie.h"
-using namespace std;
 
-class MovieManager {
-private:
-    vector<Movie> movies;
+struct MovieManager {
+    std::vector<Movie> movies;
 
-public:
     void addMovie(const Movie& movie) {
         movies.push_back(movie);
     }
 
-    vector<Movie> searchByTitle(const string& title) const {
-        vector<Movie> results;
-        for (const auto& movie : movies) {
-            if (movie.title == title)
-                results.push_back(movie);
-        }
-        return results;
+    void deleteMovie(int movieId) {
+        movies.erase(
+            std::remove_if(
+                movies.begin(),
+                movies.end(),
+                [movieId](const Movie& m) { return m.id == movieId; }
+            ),
+            movies.end()
+        );
     }
 
-    vector<Movie> searchByLanguage(const string& language) const {
-        vector<Movie> results;
-        for (const auto& movie : movies) {
-            if (movie.language == language)
-                results.push_back(movie);
-        }
-        return results;
+    std::vector<Movie> searchByTitle(const std::string& title) const {
+        std::vector<Movie> result;
+        for (const auto& m : movies)
+            if (m.title.find(title) != std::string::npos)
+                result.push_back(m);
+        return result;
     }
 
-    vector<Movie> searchByGenre(const string& genre) const {
-        vector<Movie> results;
-        for (const auto& movie : movies) {
-            if (movie.genre == genre)
-                results.push_back(movie);
-        }
-        return results;
+    std::vector<Movie> searchByLanguage(const std::string& language) const {
+        std::vector<Movie> result;
+        for (const auto& m : movies)
+            if (m.language.find(language) != std::string::npos)
+                result.push_back(m);
+        return result;
     }
 
-    vector<Movie> searchByReleaseDate(const string& date) const {
-        vector<Movie> results;
-        for (const auto& movie : movies) {
-            if (movie.releaseDate == date)
-                results.push_back(movie);
-        }
-        return results;
+    std::vector<Movie> searchByGenre(const std::string& genre) const {
+        std::vector<Movie> result;
+        for (const auto& m : movies)
+            if (m.genre.find(genre) != std::string::npos)
+                result.push_back(m);
+        return result;
     }
 
-    vector<Movie> getAllMovies() const {
+    std::vector<Movie> searchByReleaseDate(const std::string& date) const {
+        std::vector<Movie> result;
+        for (const auto& m : movies)
+            if (m.releaseDate.find(date) != std::string::npos)
+                result.push_back(m);
+        return result;
+    }
+
+    const std::vector<Movie>& getAllMovies() const {
         return movies;
     }
 };
