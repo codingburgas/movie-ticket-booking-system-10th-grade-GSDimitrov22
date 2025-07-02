@@ -1,9 +1,3 @@
-
-
-
-
-
-
 #include <iostream>
 #include <limits>
 #include <map>
@@ -81,7 +75,8 @@ int main() {
         if (currentUser.role == "admin") {
             cout << "3. Add New Movie\n";
             cout << "4. Delete Movie\n";
-            cout << "5. Logout\n";
+            cout << "5. Edit Movie\n";
+            cout << "6. Logout\n";
         }
         else {
             cout << "3. Logout\n";
@@ -134,7 +129,33 @@ int main() {
                 cout << "Movie deleted.\n";
                 break;
             }
-            case 5:
+            case 5: {
+                int id;
+                cout << "Enter Movie ID to edit: ";
+                cin >> id;
+                cin.ignore();
+                cout << "New Title: ";
+                string title;
+                getline(cin, title);
+                cout << "New Language: ";
+                string language;
+                getline(cin, language);
+                cout << "New Genre: ";
+                string genre;
+                getline(cin, genre);
+                cout << "New Release Date: ";
+                string date;
+                getline(cin, date);
+                if (movieManager.updateMovie(id, title, language, genre, date)) {
+                    cout << "Movie updated successfully.\n";
+                }
+                else {
+                    cout << "Movie ID not found.\n";
+                }
+                break;
+            }
+
+            case 6:
                 loggedIn = false;
                 main();
                 return 0;
