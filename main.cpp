@@ -3,10 +3,6 @@
 #include <sstream>
 #include <limits>
 
-/*
-#include "User.h"
-#include "Booking.h"
-*/
 
 #include "include/Hall.h"
 #include "include/MovieManager.h"
