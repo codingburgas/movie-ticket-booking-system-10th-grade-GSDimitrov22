@@ -1,11 +1,10 @@
 #pragma once
 #include <string>
-using namespace std;
 
-class Payment {
-public:
-    string method;
+struct Payment {
+    std::string method;
     double amount;
 
-    Payment(string m, double a) : method(m), amount(a) {}
+    Payment(const std::string& method, double amount)
+        : method(method), amount(amount) {}
 };
