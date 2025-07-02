@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
-using namespace std;
 
-class User {
-public:
-    string name;
-    string role;
+struct User {
+    int id;
+    std::string name;
+    std::string role;
 
-    User(string n, string r) : name(n), role(r) {}
+    User(int id, const std::string& name, const std::string& role)
+        : id(id), name(name), role(role) {}
 };
