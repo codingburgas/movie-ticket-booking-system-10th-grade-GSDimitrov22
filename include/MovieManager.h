@@ -21,6 +21,23 @@ struct MovieManager {
         );
     }
 
+    
+
+    bool MovieManager::updateMovie(int id, const std::string& title, const std::string& language, const std::string& genre, const std::string& releaseDate) {
+        for (auto& movie : movies) {
+            if (movie.id == id) {
+                movie.title = title;
+                movie.language = language;
+                movie.genre = genre;
+                movie.releaseDate = releaseDate;
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     std::vector<Movie> searchByTitle(const std::string& title) const {
         std::vector<Movie> result;
         for (const auto& m : movies)
